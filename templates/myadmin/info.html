@@ -1,0 +1,40 @@
+{% extends "myadmin/base.html" %}
+
+{% block main_body %}                
+    <!-- Content Header (Page header) -->
+   
+    <section class="content-header">
+      <h4>
+        信息提示:
+      </h4>
+      <ol class="breadcrumb">
+        <li><a href="{%  url 'myadmin_index' %}"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active"><a href="{%  url 'myadmin_user_index' 1 %}">用户管理</a></li>
+      </ol>
+    </section>
+
+    <div class="pad margin no-print">
+      <div class="callout callout-info" style="margin-bottom: 0!important;padding-left: 50px">
+        <h3><i class="fa fa-exclamation-triangle"></i>  &nbsp; {{ info }}</h3>
+        <p>还有<span id="sp">3</span>秒跳转到主界面...</p>
+     
+
+      </div>
+    </div>
+    
+    <script type="text/javascript"> 
+      //跳转脚本
+      window.onload=function(){ 
+      setInterval(go, 1000); 
+      }; 
+      var x=3; //利用了全局变量来执行 
+      function go(){ 
+      x--; 
+      if(x>0){ 
+      document.getElementById("sp").innerHTML=x; //每次设置的x的值都不一样了。 
+      }else{ 
+      location.href="{% url 'myadmin_index' %}"; 
+      } 
+      } 
+    </script> 
+{% endblock %}

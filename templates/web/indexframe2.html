@@ -1,0 +1,353 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="{% static 'web/dist/js/jquery-2.2.3.min.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'web/dist/echart/echart.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'web/dist/echart/echarts.js' %}" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'web/bootstrap/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'web/dist/css/swiper.min.css' %}" />
+    <script src="{%  static 'web/bootstrap/js/bootstrap.min.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'web/dist/js/swiper.min.js' %}" type="text/javascript" charset="utf-8"></script>
+    {% comment %}
+    <script src="{% static 'web/dist/js/vue.js'%}" type="text/javascript" charset="utf-8"></script> {% endcomment %}
+    <script src="{% static 'web/dist/js/shanghai.js'%}" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<style type="text/css">
+    html {
+        height: 100%;
+    }
+    
+    body {
+        font-family: "微软雅黑";
+        height: 100%;
+        background-size: contain;
+        color: white !important;
+        padding: 0 5px 0 5px;
+        background-color: rgba(0, 0, 0, 0);
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .borders {
+        border: solid 2px rgb(119, 156, 218);
+        border-radius: 10px;
+        padding: 10px 10px 0px 10px;
+    }
+    
+    #mainline {
+        background-image: url("{% static 'web/dist/img/map_bg.png' %}") !important;
+        background-size: cover;
+    }
+    
+    .chooseItem {
+        color: white;
+        cursor: pointer;
+        margin-left: 4px;
+        padding: 2px 4px 2px 4px;
+    }
+    
+    .chooseItem:hover {
+        color: white;
+    }
+    
+    .chosed {
+        border: solid 1px rgb(255, 192, 1);
+        border-radius: 8px;
+        background: rgb(255, 192, 1);
+        color: rgb(34, 46, 94);
+    }
+    
+    .chosed:hover {
+        color: rgb(34, 46, 94) !important;
+    }
+    
+    .picks {
+        margin-top: 1px;
+        background: rgba(0, 0, 0, 0.2);
+    }
+    
+    .innerSlide {
+        font-size: 18px;
+        height: auto;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 30px;
+        font-size: 13px;
+        font-family: microsoft yahei;
+        line-height: 1.8;
+    }
+    
+    .swiper-scrollbar-drag {
+        background: rgb(106, 139, 182);
+    }
+    
+    .titles {
+        overflow: hidden;
+        height: 45px;
+        margin-top: 10px;
+    }
+    
+    .titles p {
+        float: left;
+        margin-left: 10px;
+        line-height: 45px;
+    }
+    
+    .searchBox {
+        width: 150px;
+        padding-left: 9px;
+        line-height: 18px !important;
+    }
+    
+    .allInput {
+        height: 27px;
+        border: solid 2px rgb(178, 183, 201);
+        background: rgba(0, 0, 0, 0);
+        border-radius: 10px;
+        outline: none;
+        float: right;
+        margin: 9px 10px 0 0;
+        line-height: 13px;
+    }
+    
+    .chooseList {
+        list-style: none;
+        padding: 0;
+        overflow: hidden;
+        cursor: pointer;
+    }
+    
+    .chooseList li {
+        /*color:rgb(135,206,250);*/
+        border-bottom: solid 1px rgb(124, 146, 196);
+        width: 46%;
+        float: left;
+        height: 40px;
+        line-height: 28px;
+        font-size: 1.5rem;
+        margin-left: 2%;
+        margin-top: 8px;
+        position: relative;
+    }
+    
+    .chooseList li span {
+        margin-left: 45%;
+    }
+    
+    .furtMark {
+        /*background: rgb(157,165,187);*/
+        width: 32px;
+        height: 32px;
+        line-height: 30px;
+        border-radius: 50%;
+        font-size: 1.6rem;
+        position: absolute;
+        left: 20%;
+        text-align: center;
+        background-image: url("{% static 'web/dist/img/fontBg.png' %}");
+        background-size: cover;
+    }
+    
+    .topItem,
+    .bottomItem {
+        padding: 5px;
+    }
+    
+    .maxHeight {
+        height: 100%;
+    }
+    
+    .showBorder {
+        border: solid 1px blue;
+    }
+    
+    .swiper-pagination-bullet {
+        display: inline-block;
+        width: 38px;
+        height: 24px;
+        border-radius: 0;
+        color: white;
+        cursor: pointer;
+        line-height: 24px !important;
+        margin-left: 8px;
+        border-radius: 7px;
+        opacity: 1;
+        background: rgba(0, 0, 0, 0) !important;
+        /*padding: 2px 4px 2px 4px;*/
+    }
+    
+    .swiper-pagination-bullet-active {
+        background: rgb(255, 192, 1) !important;
+        color: rgb(34, 46, 94) !important;
+    }
+    
+    .lMarks {
+        margin-top: -31px;
+        margin-left: 70px;
+    }
+    
+    .goodChosed {
+        border-bottom: solid 2px white !important;
+    }
+</style>
+
+<body>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12 topItem">
+                <div class="borders" id="mainline" style="height:350px;"> </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 bottomItem">
+                <div class="col-md-6 borders getHeight" style="padding-top:0;">
+
+                    <div class="col-md-12 maxHeight" id="sedTab">
+                        <div class="titles picks">
+                            <p>
+                                时间区间：2011年-2021年 共
+                                <font style="color:rgb(245,186,9);">
+                                    {{num}}
+                                </font>年
+                            </p>
+                            <!--<input class="allInput" type="button" name="" id="" value="搜索" />
+									<input class="searchBox allInput" placeholder="请输入关键字">-->
+                        </div>
+                        <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+                            <div id="mainBox" style="padding:0; overflow:scroll; height:300px; " class="swiper-slide swiper-slide-active innerSlide">
+                                <ul class="chooseList">
+                                    {% for time in PriceTime %}
+                                    <li>
+                                        <div class="furtMark">{{forloop.counter}}</div><span class="spantime">{{time}}</span></li>
+                                    {% endfor %}
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-6 borders getHeight" style="padding-top:0;">
+
+                    <div class="col-md-12 maxHeight" id="sedTab">
+                        <div class="titles picks">
+                            <p>
+                                区域选择共
+                                <font style="color:rgb(245,186,9);">
+                                    {{ num2 }}
+                                </font>个区
+                            </p>
+                            <!--<input class="allInput" type="button" name="" id="" value="搜索" />
+									<input class="searchBox allInput" placeholder="请输入关键字">-->
+                        </div>
+                        <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+                            <div id="mainBox" style="padding:0; overflow:scroll; height:300px; " class="swiper-slide swiper-slide-active innerSlide">
+                                <ul class="chooseList">
+                                    {% for district in District %}
+                                    <li>
+                                        <div class="furtMark">{{forloop.counter}}</div><span class="spandistrict">{{district}}</span></li>
+                                    {% endfor %}
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <span hidden id='tempdis'>
+
+			{{request.session.adminuser.District}}
+
+		</span>
+</body>
+<script src="{% static 'web/dist/js/lable.js' %}" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    window.onload = function test() {
+        var time = '2021';
+        var district = '上海市';
+        var data = document.getElementById('tempdis').innerHTML;
+        data = $.trim(data)
+        if (data != '') {; //去空格
+            district = data;
+            // alert(district)
+        }
+
+        displayline(district, time);
+        var timelist = document.getElementsByClassName('spantime');
+        var districtlist = document.getElementsByClassName('spandistrict')
+        console.log(timelist);
+        console.log(districtlist);
+        for (var i = 0; i < timelist.length; i++) {
+            timelist[i].onclick = function() {
+                //弹出对应的li节点里面的内容
+                time = this.innerHTML;
+                displayline(district, time);
+                // alert(this.innerHTML);
+                //将节点的颜色变成红色
+                this.style.color = "red";
+
+            }
+        }
+        for (var i = 0; i < districtlist.length; i++) {
+            districtlist[i].onclick = function() {
+                //弹出对应的li节点里面的内容
+                // alert(this.innerHTML);
+                district = this.innerHTML;
+                displayline(district, time);
+                //将节点的颜色变成红色
+                this.style.color = "red";
+            }
+        }
+    }
+
+    function displayline(district, year) {
+
+        // Pyecharts图表初始化
+        console.log('displayline');
+        console.log(district, year)
+        var chart = echarts.init(document.getElementById('mainline'), 'white', {
+            renderer: 'canvas'
+        });
+        var url = "{% url 'web_line' '上海市' '2021' %}";
+
+        var newurl = url.replace('/2021', '/' + year);
+        newurl = newurl.replace(encodeURI('/上海市'), '/' + district)
+        console.log("newurl")
+        console.log(newurl);
+        chart.showLoading({
+            text: '正在加载数据'
+        }); //增加加载提示
+        $.ajax({
+            type: 'get', //请求方式
+            url: newurl,
+            dataType: 'json', //响应数据格式 
+            success: function(res) { //成功执行
+                // 展示Pyecharts整体市场柱状组合图
+                console.log(res)
+                chart.clear();
+                chart.setOption(res); //解析Json字符串
+                chart.hideLoading();
+            },
+        });
+
+    }
+</script>
+
+</html>

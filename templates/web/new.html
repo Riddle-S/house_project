@@ -1,0 +1,43 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="{% static 'web/dist/js/jquery-2.2.3.min.js' %}" type="text/javascript" charset="utf-8"></script>
+		<script src="{% static 'web/dist/echart/echart.js' %}" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'web/bootstrap/css/bootstrap.min.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'web/dist/css/swiper.min.css' %}" />
+		<script src="{%  static 'web/bootstrap/js/bootstrap.min.js' %}" type="text/javascript" charset="utf-8"></script>
+		<script src="{% static 'web/dist/js/swiper.min.js' %}" type="text/javascript" charset="utf-8"></script>
+		<script src="{% static 'web/dist/js/vue.js'%}" type="text/javascript" charset="utf-8"></script>
+	
+	</head>
+
+<body>
+    <div id="mainmap" style="width:600px height:1000px"> test </div>
+    <script type="text/javascript">
+        $("#mainmap").click(function () {
+            
+            // Pyecharts图表初始化
+            var chart = echarts.init(document.getElementById('mainmap'), 'white', {renderer: 'canvas'});
+            chart.showLoading({
+              text : '正在加载数据'
+            });  //增加加载提示
+            $.ajax({
+                type:'get',         //请求方式
+                url:"{% url 'web_shanghaimap' '2021-12-01' %}",       //请求地址
+                dataType:'json',        //响应数据格式 
+                success: function (res) {     //成功执行
+                    // 展示Pyecharts整体市场柱状组合图
+                    alert(res);
+                    chart.clear();
+                    chart.setOption(res);
+                    chart.hideLoading();
+                },
+            });
+            
+        })
+    </script>
+</body>
+</html>

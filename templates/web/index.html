@@ -1,0 +1,129 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>房价大数据分析平台</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="{% static 'web/bootstrap/css/bootstrap.min.css' %}">
+  <!-- 框架css -->
+  <link rel="stylesheet" href="{% static 'web/dist/css/AdminLTE.min.css' %} ">
+  <!-- 引入主题 -->
+  <link rel="stylesheet" href="{% static 'web/dist/css/skin-blue.min.css' %} ">
+   <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" href="{% static 'web/dist/css/font-awesome.min.css' %}"/>
+  <!-- Ionicons -->
+  <link rel="stylesheet" type="text/css" href="{% static 'web/dist/css/ionicons.min.css' %}"/>
+  <!-- 自定义css -->
+	<link rel="stylesheet" type="text/css" href="{% static 'web/dist/css/myapp.css' %}"/>
+	<!--兼容IE8~9-->
+</head>
+<style type="text/css">
+	body{
+		font-family: "微软雅黑";
+	}
+	.content-wrapper{
+			background-image: url("{% static 'web/dist/img/bg.jpg' %}");
+			background-size: contain;
+	}
+	iframe{
+		background: rgba(0,0,0,0);
+	}
+</style>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <header class="main-header">
+    <a href="{% url 'web_index' %}" class="logo">
+      <span class="logo-mini">房价大数据分析平台</span>
+      <span class="logo-lg">房价大数据分析平台</span>
+    </a>
+    <nav class="navbar navbar-static-top">
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            
+            {% if request.session.adminuser %}
+            
+            <a id="nog" href="{%  url 'myadmin_index' %}" class="dropdown-toggle">
+            <span id="suc" class="hidden-xs"> {{request.session.adminuser.Username}}
+              {% if request.session.adminuser.AdminState == 1 %} 管理员 
+              {% elif request.session.adminuser.AdminState == 0 %} 普通用户 
+              {% elif request.session.adminuser.AdminState == 2 %} 超级管理员 
+              {% endif %}
+              的后台 </span>
+            {% else %}
+            <a id="nog" href="{%  url 'myadmin_login' %}" class="dropdown-toggle">
+            <span id="suc" class="hidden-xs">登陆</span>
+            {% endif %}
+                  
+              </a>
+          </li>
+        </ul>
+         
+      </div> 
+    </nav>
+  </header>
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <ul class="sidebar-menu">
+      	<li class="treeview active aloneBut" url="{% url 'web_indexframe' %}">
+          <a href="{% url 'web_index' %}">
+            <i class="fa fa-desktop"></i> 
+            <span> 首页 </span>
+
+          </a>
+
+        </li>
+        <li class="treeview" url="{% url 'web_qushi' %}">
+          <a href="{%  url 'web_qushi' %}">
+            <i class="fa fa-bar-chart"></i> <span>价格走势</span>
+          </a>
+        </li>
+       
+      </ul>
+    </section>
+  </aside>
+  <div class="content-wrapper" style="position: relative;">
+       <iframe id="mianFrame" src="{% url 'web_indexframe' %}"></iframe>
+       
+  </div>
+</div>
+<!-- jQuery 2.2.3 -->
+<script src="{% static 'web/dist/js/jquery-2.2.3.min.js' %}" type="text/javascript" charset="utf-8"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'web/dist/js/jquery-ui.min.js' %}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+
+<!-- Bootstrap 3.3.6 -->
+<script src="{% static 'web/bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'web/dist/js/app.js' %}"></script>
+<script src="{% static 'web/dist/js/menu.js' %}" type="text/javascript" charset="utf-8"></script>
+</body>
+{% comment %} <script>
+    getLog();
+    function getLog() {
+        var loged = localStorage.getItem('loged');
+        if (loged) {
+            document.getElementById('nog').style.display = 'none';
+            document.getElementById('suc').style.display = 'block';
+            document.getElementById('setting').style.display = 'block'
+            document.getElementById('setting2').style.display = 'block'
+        }
+    }
+    function getUnlog() {
+        localStorage.removeItem('loged');
+        window.location.reload();
+    }
+    function goLog() {
+         window.location.href = '../login.html'
+    }
+</script> {% endcomment %}
+
+</html>

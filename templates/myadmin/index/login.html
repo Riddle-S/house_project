@@ -1,0 +1,93 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<!--login.html-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>房价系统用户登录</title>
+  <!-- 支持响应式布局 -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="{% static 'myadmin/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+  <!-- 象形字体 -->
+  <link rel="stylesheet" href="{% static 'myadmin/bower_components/font-awesome/css/font-awesome.min.css' %}">
+  <!-- 图标 -->
+  <link rel="stylesheet" href="{% static 'myadmin/bower_components/Ionicons/css/ionicons.min.css' %}">
+  <!-- 主题风格样式 -->
+  <link rel="stylesheet" href="{% static 'myadmin/dist/css/AdminLTE.css' %}">
+  <!-- AdminLTE 皮肤.这里选择的是skin-blue样式，我们还可以有其他皮肤可以选择. -->
+  <link rel="stylesheet" href="{% static 'myadmin/dist/css/skins/skin-blue.min.css' %}">
+  <!-- 兼容IE9以下浏览器 -->
+  <!--[if lt IE 9]>
+  <script src="{% static 'myadmin/local/js/html5shiv.min.js' %}"></script>
+  <script src="{% static 'myadmin/local/js/respond.min.js' %}"></script>
+  
+  <![endif]-->
+  <!-- Google Font -->
+  
+  <link rel="stylesheet" href="{% static 'myadmin/local/css/google_fonts.css' %}">
+  <script type="text/javascript">
+    function Code() {
+      document.getElementById("img").src="{% url 'myadmin_verify' %}?" + Math.random();
+    }   
+  
+  </script>
+</head>
+<body class="hold-transition login-page" >
+
+<div class="login-box">
+  
+  <div class="login-logo">
+    <a href="{% url 'myadmin_login'  %}"><b>用户登录</b></a>
+  </div>
+  <!-- /.login-logo -->
+
+  
+  <div class="login-box-body">
+    <p class="login-box-msg" style="color:red">{{info}} </p>
+
+    <form action="{% url 'myadmin_dologin' %}" method="post">
+    {% csrf_token %}
+    
+      <div class="form-group has-feedback">
+        <input type="text" name='Username' class="form-control" placeholder="用户名:" >
+        <span class="glyphicon glyphicon-user form-control-feedback" ></span>
+      </div>
+      <div class="form-group has-feedback" >
+        <input type="password" name='password' class="form-control" placeholder="密码">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback"   >
+        <input type="text" name='code' class="form-control"   placeholder="验证码"  >
+        <br>
+        <span style="padding:10px">
+
+          <img  src="{% url 'myadmin_verify' %}" id="img"  style="height:34px;width:100px"  > 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="#" onclick="Code()">点击此处可刷新验证码</a>
+          
+        </span>
+      </div>
+
+      <span> 测试：su 123 <span>
+        
+     
+      <div class="row">
+        <div class="col-xs-12" style="text-align:center">
+          <button type="submit" class="btn btn-primary btn-block btn-flat" >登录</button>
+          首次使用?<a href= "{% url 'myadmin_register' %}">点我注册</a>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+<!-- jQuery 3 -->
+<script src="{% static 'myadmin/bower_components/jquery/dist/jquery.min.js' %}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{% static 'myadmin/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

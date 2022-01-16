@@ -1,0 +1,34 @@
+使用的软件，包以及对应版本：
+vscode                   1.50.0
+django                    2.2.24
+djangorestframework       3.12.4
+jsonschema                2.6.0
+numpy                     1.21.5
+openpyxl                  2.5.6
+pandas                    0.23.4
+pillow                    5.2.0
+pyecharts                 1.9.1
+pymysql                   1.0.2
+python                    3.7.0
+scikit-image              0.14.0        
+scikit-learn              1.0.2                 
+scipy                     1.5.2            
+
+使用的插件：
+Django
+
+数据库：
+ Mysql 5.7
+ 'ENGINE': 'django.db.backends.mysql',
+ 'NAME': 'house_project',
+ 'USER': 'root',
+ 'PASSWORD': 'sxy000217',
+ 'HOST': 'localhost',
+ 'PORT': '3306',
+
+
+系统运行：
+在house文件下目录下，打开命令行输入 python manage.py runserver即可。
+之后在浏览器地址栏输入 http://localhost:8000/ 即可打开网页，首页上右上角在未登陆账号情况下会显示为登录，登录之后
+便会显示为XX的后台，登陆账号在登录窗口下方，只有管理员（等级1）以及超级管理员（等级2）在登陆后台之后可以看见
+其他用户信息，新注册账户均为普通用户（等级0）。

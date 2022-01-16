@@ -1,0 +1,10 @@
+iframe{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background: white;
+	border: none;
+}
+.treeview-menu li{
+	cursor: pointer;
+}

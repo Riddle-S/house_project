@@ -1,0 +1,78 @@
+{%  extends 'myadmin/base.html' %}
+
+{%  block main_body %}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+      房价信息
+      <small>房价系统后台管理</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{%  url 'myadmin_index' %}"><i class="fa fa-dashboard"></i> 首页</a></li>
+      <li class="active"><a href="#">房价信息查看</a></li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content container-fluid">
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="box">
+          <div class="box-header">
+            <h3 class="box-title">房价信息表</h3>
+
+            <div class="box-tools">
+                <form action="{% url 'myadmin_price_index' 1 %}" method="get">
+                    <div class="input-group input-group-sm" style="width:150px;">
+                      <input type="text" name="keyword" class="form-control pull-right" placeholder="地区/年份">
+    
+                      <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                      </div>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <tr>
+                <th>标识号</th>
+                <th>地区</th>
+                <th>价格</th>
+                <th>时间</th>
+              </tr>
+              <tr>
+            {%  for vo in pricelist %}
+              </tr>
+              <tr>
+                <td>{{vo.UniqueCode}}</td>
+                <td>{{vo.District}}</td>
+                <td>{{vo.Price}}</td>
+                <td>{{vo.PriceTime}}</td>
+              </tr>
+            {%   endfor %}
+            </table>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right">
+              <li><a href="{% url 'myadmin_price_index' pindex|add:-1 %}?{{mywhere|join:'&'}}">&laquo;</a></li>
+            {%  for p in plist %}
+            
+            <li {% if p == pindex %}class="active" {% endif %}><a href="{% url 'myadmin_price_index' p %}?{{mywhere|join:'&'}}">{{p}}</a></li> <!--active是被选中-->
+            {% endfor %}
+              <li><a href="{% url 'myadmin_price_index' pindex|add:1 %}?{{mywhere|join:'&'}}">&raquo;</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- /.box -->
+      </div>
+    </div>
+
+  </section>
+  <!-- /.content -->
+
+{%  endblock %}
